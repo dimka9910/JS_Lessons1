@@ -3,6 +3,8 @@ package labs.lab23.src.registration.service;
 import labs.lab23.src.registration.model.ActionStatus;
 import labs.lab23.src.registration.model.CourseInstance;
 
+import java.util.List;
+
 /**
  * Интерфейс сервиса для студентов
  */
@@ -35,6 +37,6 @@ public interface StudentService {
      * @param studentId идентификатор студента
      * @return список всех курсов, на которые записан студент
      */
-    CourseInstance[] findAllSubscriptionsByStudentId(long studentId);
+    List<CourseInstance> findAllSubscriptionsByStudentId(long studentId);
     
 }
