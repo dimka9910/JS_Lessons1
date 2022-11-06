@@ -4,14 +4,12 @@ import labs.lab23.src.registration.model.*;
 import labs.lab23.src.registration.reader.*;
 import labs.lab23.src.registration.service.CourseInstructorService;
 import labs.lab23.src.registration.service.StudentService;
+import labs.lab23.src.registration.service.UnsubscribeException;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
-
-import static labs.lab23.src.registration.model.StudentCategory.BACHELOR;
-import static labs.lab23.src.registration.model.StudentCategory.MASTER;
 
 public class CourseInstructorAndStudentServiceImpl implements StudentService, CourseInstructorService {
     private List<Student> bachelorStudents;
@@ -71,8 +69,10 @@ public class CourseInstructorAndStudentServiceImpl implements StudentService, Co
 
         var prerequisites = courseInfo.getPrerequisites();
         if (prerequisites != null) {
-            if (!Arrays.stream(prerequisites).allMatch(p -> Arrays.stream(student.getCompletedCourses()).anyMatch(c -> c == p)))
-                return ActionStatus.NOK;
+            if (!Arrays.stream(prerequisites).allMatch(p -> Arrays.stream(student.getCompletedCourses()).anyMatch(c -> c == p))) {
+                throw new UnsubscribeException("ебать чет не так пошло на 73й строчке");
+//                return ActionStatus.NOK;
+            }
         }
 
         lst.add(courseInstance.getId());
